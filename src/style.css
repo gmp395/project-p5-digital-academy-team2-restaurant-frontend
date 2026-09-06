@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500&family=Inter:wght@400;600&display=swap');
 @import "tailwindcss";
 
 @theme {
+  --color-highlight: #d98a98;
   --color-surface: #fcf9ef;
   --color-surface-dim: #dddad0;
   --color-surface-bright: #fcf9ef;
@@ -48,8 +50,24 @@
   --color-background: #fcf9ef;
   --color-on-background: #1c1c16;
   --color-surface-variant: #e5e2d9;
+
+  --font-headline: 'Cormorant Garamond', serif;
+  --font-body: 'Manrope', sans-serif;
+  --font-ui: 'Inter', sans-serif;
+
+  --text-headline-md: 2rem;
+  --text-headline-md--line-height: 2.5rem;
+  --text-body-md: 1rem;
+  --text-body-md--line-height: 1.5rem;
+  --text-label-caps: 0.75rem;
+  --text-label-caps--line-height: 1rem;
+  --text-button: 0.875rem;
+  --text-button--line-height: 1.25rem;
+
+  --tracking-caps: 0.08em;
 }
 
+@layer base {
 :root {
   --text: #6b6375;
   --text-h: #08060d;
@@ -345,4 +363,5 @@ code {
     right: 0;
     border-right-color: var(--border);
   }
+}
 }
