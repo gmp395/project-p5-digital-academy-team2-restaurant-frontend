@@ -15,9 +15,9 @@ import eventoChosco from '@/assets/eventos-chosco.jpeg'
 import eventoMesaRedonda from '@/assets/eventos-mesa-redonda.jpeg'
 
 /*
- * TODO: contenido de relleno (placeholder) tal y como aparece repetido
- * en el diseño de Figma. Sustituir por los datos reales de cada plato
- * (probablemente disponibles cuando se trabaje la Épica de Carta).
+ * TODO: contenido de relleno (placeholder) razonable por plato, a falta de
+ * los datos reales y definitivos que llegarán con la Épica de Carta
+ * (nombre exacto, precio, descripción y alérgenos confirmados por cocina).
  */
 const especialidades = [
   {
@@ -27,7 +27,7 @@ const especialidades = [
     available: true,
     name: 'Carrillera de Goxu a la Sidra',
     price: '24,50 €',
-    description: 'Guiso tradicional a fuego lento con reducción de sidra natural DOP de...',
+    description: 'Guiso tradicional a fuego lento con reducción de sidra natural DOP de Asturias.',
     allergens: ['Gluten', 'Sulfitos'],
   },
   {
@@ -35,30 +35,30 @@ const especialidades = [
     image: cardPanbao,
     badge: null,
     available: true,
-    name: 'Carrillera de Goxu a la Sidra',
-    price: '24,50 €',
-    description: 'Guiso tradicional a fuego lento con reducción de sidra natural DOP de...',
-    allergens: ['Gluten', 'Sulfitos'],
+    name: 'Pan Bao de Goxu',
+    price: '14,00 €',
+    description: 'Bao esponjoso relleno de goxu deshilachado, encurtidos y salsa asturiana.',
+    allergens: ['Gluten'],
   },
   {
     id: 3,
     image: cardPitu,
     badge: null,
     available: true,
-    name: 'Carrillera de Goxu a la Sidra',
-    price: '24,50 €',
-    description: 'Guiso tradicional a fuego lento con reducción de sidra natural DOP de...',
-    allergens: ['Gluten', 'Sulfitos'],
+    name: 'Pitu Asturcelta Asado',
+    price: '19,50 €',
+    description: 'Pitu de raza asturcelta asado lentamente, con salsa de sidra y hierbas de la huerta.',
+    allergens: ['Sulfitos'],
   },
   {
     id: 4,
     image: cardCroquetas,
     badge: 'Agotado',
     available: false,
-    name: 'Carrillera de Goxu a la Sidra',
-    price: '24,50 €',
-    description: 'Guiso tradicional a fuego lento con reducción de sidra natural DOP de...',
-    allergens: ['Gluten', 'Sulfitos'],
+    name: 'Croquetas de Goxu',
+    price: '9,50 €',
+    description: 'Croquetas caseras cremosas de goxu ibérico, fritas al momento.',
+    allergens: ['Gluten', 'Lácteos'],
   },
 ]
 
