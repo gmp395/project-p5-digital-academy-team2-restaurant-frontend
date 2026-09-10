@@ -6,13 +6,13 @@
 // NOTE: colores aproximados de la paleta estándar de Tailwind, pendientes
 // de sustituir por los definitivos cuando Iker comparta su configuración.
 
-import cardCarrillera from '@/assets/home-card-carrillera.jpeg'
-import cardPanbao from '@/assets/home-card-panbao.jpeg'
-import cardPitu from '@/assets/home-card-pitu.jpeg'
-import cardCroquetas from '@/assets/home-card-croquetas.jpeg'
-import eventoMaridaje from '@/assets/eventos-maridaje.jpeg'
-import eventoChosco from '@/assets/eventos-chosco.jpeg'
-import eventoMesaRedonda from '@/assets/eventos-mesa-redonda.jpeg'
+import cardCarrillera from '@/assets/home-img/home-card-beef-cheek.jpeg'
+import cardPanbao from '@/assets/home-img/home-card-bao-bread.jpeg'
+import cardPitu from '@/assets/home-img/home-card-traditional-asturian-free-range-rooster.jpeg'
+import cardCroquetas from '@/assets/home-img/home-card-croquettes.jpeg'
+import eventoMaridaje from '@/assets/events-img/events-pairing.jpeg'
+import eventoChosco from '@/assets/events-img/events-asturian-cured-pork-sausage.jpeg'
+import eventoMesaRedonda from '@/assets/events-img/events-panel-discussion.jpeg'
 
 /*
  * TODO: contenido de relleno (placeholder) razonable por plato, a falta de
@@ -363,7 +363,7 @@ const eventos = [
 
 <style scoped>
 .atmosphere-wrapper {
-  background-image: url('@/assets/home-background.png');
+  background-image: url('@/assets/home-img/home-background.png');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 150% auto;
