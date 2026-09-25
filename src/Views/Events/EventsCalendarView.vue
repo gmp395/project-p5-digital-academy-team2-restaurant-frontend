@@ -1,62 +1,16 @@
 <script setup>
+import { onMounted } from 'vue'
+import { useEvents } from '@/composables/useEvents'
 
-const eventsByMonth = [
-  {
-    month: 'Marzo',
-    events: [
-      {
-        id: 1,
-        image: '/events-img/events-pairing.jpeg',
-        date: '28 MARZO · 20:30H',
-        title: 'Cena Maridaje: Sidras de Espalme & Cortes Nobles',
-        meta: ['18 plazas exclusivas', '75 € / persona'],
-      },
-    ],
-  },
-  {
-    month: 'Abril',
-    events: [
-      {
-        id: 2,
-        image: '/events-img/events-asturian-cured-pork-sausage.jpeg',
-        date: '2 ABRIL · 14:00H',
-        title: 'Jornadas Gastronómicas del Chosco y la Carrillera',
-        meta: ['Menú degustación 5 pases', '48 € / persona'],
-      },
-      {
-        id: 3,
-        image: '/events-img/events-panel-discussion.jpeg',
-        date: '24 ABRIL · 19:00H',
-        title: 'Mesa Redonda: De la Dehesa al plato',
-        meta: ['Coloquio & Cóctel de cierre', 'Entrada gratuita'],
-      },
-    ],
-  },
-  {
-    month: 'Junio',
-    events: [
-      {
-        id: 4,
-        image: '/events-img/events-pairing.jpeg',
-        date: '15 JUNIO · 21:00H',
-        title: 'Noche de Sidra Bajo las Estrellas',
-        meta: ['Terraza exterior', '55 € / persona'],
-      },
-    ],
-  },
-  {
-    month: 'Septiembre',
-    events: [
-      {
-        id: 5,
-        image: '/events-img/events-asturian-cured-pork-sausage.jpeg',
-        date: '20 SEPTIEMBRE · 20:00H',
-        title: 'Vendimia y Sidra: Fiesta de la Cosecha',
-        meta: ['Aforo limitado', '60 € / persona'],
-      },
-    ],
-  },
-]
+/*
+ * Calendario anual de eventos.
+ * Los eventos se piden al back (GET /api/events) a través del composable useEvents,
+ * que ya los devuelve adaptados y agrupados por mes.
+ */
+const { eventsByMonth, cargando, errorCarga, cargarEventos } = useEvents()
+
+/* Al montar la vista, se piden los eventos al back */
+onMounted(cargarEventos)
 </script>
 
 <template>
@@ -75,50 +29,63 @@ const eventsByMonth = [
         Todas nuestras cenas maridaje, jornadas gastronómicas y experiencias exclusivas a lo largo del año.
       </p>
 
-      <div v-for="group in eventsByMonth" :key="group.month" class="mt-12">
-        <h2
-          class="text-on-primary text-xl md:text-2xl mb-4 pb-2 border-b border-outline-variant/30"
-          style="font-family: 'Cormorant Garamond', serif"
-        >
-          {{ group.month }}
-        </h2>
+      <!-- Estado de carga -->
+      <p v-if="cargando" class="font-ui text-sm text-on-primary mt-12">
+        Cargando eventos...
+      </p>
 
-        <div class="flex flex-col divide-y divide-outline-variant/20">
-          <div
-            v-for="event in group.events"
-            :key="event.id"
-            class="flex items-center gap-4 py-4"
+      <!-- Error al conectar con el back -->
+      <p v-else-if="errorCarga" class="font-ui text-sm text-error mt-12">
+        No se han podido cargar los eventos. Inténtelo de nuevo más tarde.
+      </p>
+
+      <!-- Eventos agrupados por mes -->
+      <template v-else>
+        <div v-for="group in eventsByMonth" :key="group.key" class="mt-12">
+          <h2
+            class="text-on-primary text-xl md:text-2xl mb-4 pb-2 border-b border-outline-variant/30"
+            style="font-family: 'Cormorant Garamond', serif"
           >
-            <img
-              :src="event.image"
-              :alt="event.title"
-              class="w-16 h-16 rounded-lg object-cover shrink-0"
-            />
+            {{ group.month }}
+          </h2>
 
-            <div class="flex-1 min-w-0">
-              <p class="text-highlight text-xs font-semibold uppercase tracking-wide m-0">
-                {{ event.date }}
-              </p>
-              <h3
-                class="text-on-primary text-base md:text-lg font-semibold m-0 truncate"
-                style="font-family: 'Manrope', sans-serif"
-              >
-                {{ event.title }}
-              </h3>
-              <p class="text-on-primary/70 text-xs mt-1">
-                {{ event.meta.join(' · ') }}
-              </p>
-            </div>
-
-            <RouterLink
-              :to="`/ofertas-eventos`"
-              class="mt-auto bg-primary text-on-primary text-xs font-semibold uppercase tracking-wide py-2.5 rounded-lg transition hover:opacity-90 text-center"
+          <div class="flex flex-col divide-y divide-outline-variant/20">
+            <div
+              v-for="event in group.events"
+              :key="event.id"
+              class="flex items-center gap-4 py-4"
             >
-              Ver disponibilidad
-            </RouterLink>
+              <img
+                :src="event.image"
+                :alt="event.title"
+                class="w-16 h-16 rounded-lg object-cover shrink-0"
+              />
+
+              <div class="flex-1 min-w-0">
+                <p class="text-highlight text-xs font-semibold uppercase tracking-wide m-0">
+                  {{ event.date }}
+                </p>
+                <h3
+                  class="text-on-primary text-base md:text-lg font-semibold m-0 truncate"
+                  style="font-family: 'Manrope', sans-serif"
+                >
+                  {{ event.title }}
+                </h3>
+                <p class="text-on-primary/70 text-xs mt-1">
+                  {{ event.meta.join(' · ') }}
+                </p>
+              </div>
+
+              <RouterLink
+                :to="`/ofertas-eventos`"
+                class="mt-auto bg-primary text-on-primary text-xs font-semibold uppercase tracking-wide py-2.5 rounded-lg transition hover:opacity-90 text-center"
+              >
+                Ver disponibilidad
+              </RouterLink>
+            </div>
           </div>
         </div>
-      </div>
+      </template>
     </div>
   </main>
 </template>
