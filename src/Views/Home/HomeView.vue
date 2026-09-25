@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import HeroSection from '../../components/HeroSection.vue'
 import SpecialtiesSection from '../../components/SpecialtiesSection.vue'
 import EventsSection from '../../components/EventsSection.vue'
@@ -10,8 +10,14 @@ import { useEvents } from '@/composables/useEvents'
 const { products } = useProducts()
 const dishes = computed(() => products.value.filter((p) => p.featured))
 
-const { events: allEvents } = useEvents()
+/*
+ * Eventos del back: la Home solo muestra los destacados (featured = true).
+ * La carga se lanza al montar la página.
+ */
+const { events: allEvents, cargarEventos } = useEvents()
 const events = computed(() => allEvents.value.filter((e) => e.featured))
+
+onMounted(cargarEventos)
 </script>
 
 <template>
